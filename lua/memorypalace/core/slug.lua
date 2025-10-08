@@ -1,7 +1,8 @@
 local M = {}
 
 function M.slugify(s)
-  return "note"
+    return "note"
 end
 
 return M
+

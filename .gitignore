@@ -1,0 +1,16 @@
+# Accidentally created directories from unexpanded paths
+~
+
+# Common editor/IDE files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Lua bytecode
+*.luac
+
+# Testing/debug files
+debug.log
+
+CONTEXT.md

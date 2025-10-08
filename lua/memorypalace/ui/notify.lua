@@ -1,11 +1,12 @@
 local M = {}
 
 function M.info(msg)
-  vim.notify(msg, vim.log.levels.INFO)
+    vim.notify(msg, vim.log.levels.INFO)
 end
 
 function M.warn(msg)
-  vim.notify(msg, vim.log.levels.WARN)
+    vim.notify(msg, vim.log.levels.WARN)
 end
 
 return M
+
