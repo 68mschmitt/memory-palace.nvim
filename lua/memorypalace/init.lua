@@ -14,5 +14,9 @@ function M.sort_note()
     return require("memorypalace.note.sort").sort_current_note()
 end
 
+function M.create_note_at()
+    return require("memorypalace.note.create_at").create_note_at()
+end
+
 return M
 

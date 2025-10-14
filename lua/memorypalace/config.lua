@@ -12,6 +12,11 @@ local default_config = {
     exclude_dirs = { ".git", ".obsidian" },
     confirm_on_cross_fs = false,
     allow_non_md = true,
+    templates = {
+        none = "",
+        default = "",
+    },
+    default_template = "none",
 }
 
 local config = {}
