@@ -15,7 +15,10 @@ local default_config = {
     templates = {
         none = "",
     },
-    default_template = "",
+    default_template = "none",
+    enable_recent_dirs = true,
+    max_recent_dirs = 5,
+    recent_state_file = vim.fn.stdpath("state") .. "/memory-palace-mru.json",
 }
 
 local config = {}

@@ -52,6 +52,19 @@ function M.prompt_for_template(templates, default_key, callback)
 
     table.sort(template_keys)
 
+    local default_idx = nil
+    for i, key in ipairs(template_keys) do
+        if key == default_key then
+            default_idx = i
+            break
+        end
+    end
+
+    if default_idx and default_idx > 1 then
+        table.remove(template_keys, default_idx)
+        table.insert(template_keys, 1, default_key)
+    end
+
     vim.ui.select(template_keys, {
         prompt = "Select template:",
         format_item = function(item)

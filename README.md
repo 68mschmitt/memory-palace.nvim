@@ -12,6 +12,7 @@ A minimal Neovim plugin for quick note creation and organization. Capture though
 
 ### Direct Note Creation (`:CreateNote`)
 - **Create in Place**: Create notes directly in their final destination
+- **Recent Destinations**: Quick access to recently used directories with saved templates
 - **Directory Drill-down**: Interactive navigation to choose location
 - **Optional Labeling**: Add descriptive names or skip for timestamp-only filenames
 - **Template Selection**: Choose from multiple templates with variable substitution
@@ -127,6 +128,11 @@ Created: {{datetime}}
   },
   default_template = "none",                 -- Pre-selected template in picker
   
+  -- Recent Destinations (for CreateNote)
+  enable_recent_dirs = true,                 -- Enable recent destinations feature
+  max_recent_dirs = 5,                       -- Number of recent destinations to remember
+  recent_state_file = vim.fn.stdpath("state") .. "/memory-palace-mru.json",
+  
   -- Note Sorting
   trailing_marker = "--note",                -- Filename suffix marker
   exclude_dirs = { ".git", ".obsidian" },   -- Directories to exclude from picker
@@ -161,12 +167,15 @@ Created: {{datetime}}
 
 #### Create-In-Place (Known destination)
 1. **Create**: Use `:CreateNote` to create a note directly:
-   - Navigate through your directory structure
+   - **Quick path**: Select from recent destinations (includes saved template)
+   - **Full path**: Navigate through your directory structure
    - Choose a destination (or create new directories)
    - Optionally provide a descriptive label (or press Enter to skip)
-   - Select a template from your configured options
+   - Select a template from your configured options (skipped if using recent)
    - File is created with the selected template (variables substituted)
 2. **Edit**: Write your content in the final location
+
+**Recent Destinations**: The plugin remembers your last 5 used directory + template combinations. Select a recent entry to skip both directory and template pickers, going straight to the label prompt.
 
 ### Programmatic API
 
@@ -233,9 +242,28 @@ Date: {{date}}
 }
 ```
 
+## Recent Destinations
+
+The plugin tracks your most recently used directory + template combinations when using `:CreateNote`. When you invoke `:CreateNote`, you'll see:
+
+```
+Select destination:
+→ projects/miata [task] (2 hours ago)
+→ journal [journal] (today)
+─────────────
+📁 Browse directories...
+```
+
+**Benefits:**
+- Skip directory navigation for frequent destinations
+- Automatically use the same template as last time
+- Faster workflow: 3 clicks → 1 click + label input
+
+**Storage:** Recent destinations are stored locally in `~/.local/state/nvim/memory-palace-mru.json`
+
 ## Directory Navigation
 
-When sorting a note, you'll see:
+When browsing directories, you'll see:
 - **← Go Back** - Navigate to parent directory (hidden at base)
 - **✓ Drop Here** - Select current directory as destination
 - **+ Create New** - Create a new subdirectory
@@ -250,6 +278,7 @@ When sorting a note, you'll see:
   - Thoughtful organization when ready
 - **Create in place**: `:CreateNote`
   - Direct creation when destination is known
+  - Recent destinations for lightning-fast repeated workflows
   - Optional template support for structured notes
 - Timestamp preservation maintains creation history
 - Clean, predictable file naming for easy searching
