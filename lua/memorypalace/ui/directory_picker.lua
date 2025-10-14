@@ -42,16 +42,17 @@ end
 function M.build_picker_items(base_dir, current_path, subdirs)
     local items = {}
 
+    for _, subdir in ipairs(subdirs) do
+        table.insert(items, subdir)
+    end
+
+    table.insert(items, "+ Create New")
+
     if normalize_path(current_path) ~= normalize_path(base_dir) then
         table.insert(items, "← Go Back")
     end
 
     table.insert(items, "✓ Drop Here")
-    table.insert(items, "+ Create New")
-
-    for _, subdir in ipairs(subdirs) do
-        table.insert(items, subdir)
-    end
 
     return items
 end
