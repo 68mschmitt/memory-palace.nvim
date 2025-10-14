@@ -24,4 +24,24 @@ function M.get_template_variables(label, timestamp)
     }
 end
 
+function M.get_sort_template_variables(label, timestamp, content)
+    local vars = M.get_template_variables(label, timestamp)
+    vars.content = content or ""
+    return vars
+end
+
+function M.apply_template_with_content(template, variables, original_content)
+    local result = M.substitute_variables(template, variables)
+    
+    if not template:match("{{content}}") then
+        if result ~= "" and original_content ~= "" then
+            result = result .. "\n" .. original_content
+        elseif original_content ~= "" then
+            result = original_content
+        end
+    end
+    
+    return result
+end
+
 return M
