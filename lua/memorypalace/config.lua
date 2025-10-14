@@ -14,9 +14,8 @@ local default_config = {
     allow_non_md = true,
     templates = {
         none = "",
-        default = "",
     },
-    default_template = "none",
+    default_template = "",
 }
 
 local config = {}
